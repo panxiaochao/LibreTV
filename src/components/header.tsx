@@ -100,6 +100,9 @@ export function Header({ showSearch = false }: { showSearch?: boolean }) {
             <HeaderLink href="/live" active={pathname === '/live'}>
               直播
             </HeaderLink>
+            <HeaderLink href="https://movie.douban.com/" external>
+              豆瓣电影
+            </HeaderLink>
             <HeaderLink href="/about" active={pathname === '/about'}>
               关于
             </HeaderLink>
@@ -123,15 +126,30 @@ export function Header({ showSearch = false }: { showSearch?: boolean }) {
   );
 }
 
-function HeaderLink({ href, active, children }: { href: string; active: boolean; children: React.ReactNode }) {
+function HeaderLink({
+  href,
+  active,
+  children,
+  external,
+}: {
+  href: string;
+  active?: boolean;
+  children: React.ReactNode;
+  external?: boolean;
+}) {
+  const className = cn(
+    'px-2.5 py-1.5 rounded-md text-sm transition-colors',
+    active ? 'text-content bg-hover' : 'text-muted hover:text-content'
+  );
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+        {children}
+      </a>
+    );
+  }
   return (
-    <Link
-      href={href}
-      className={cn(
-        'px-2.5 py-1.5 rounded-md text-sm transition-colors',
-        active ? 'text-content bg-hover' : 'text-muted hover:text-content'
-      )}
-    >
+    <Link href={href} className={className}>
       {children}
     </Link>
   );
