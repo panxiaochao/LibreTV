@@ -10,7 +10,7 @@ import { fetchUpstream, getCache, setCache } from './fetch-utils';
 const DOUBAN_API = 'https://movie.douban.com/j/search_subjects';
 const CACHE_TTL = 10 * 60 * 1000;
 const UA =
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
 
 interface DoubanRawSubject {
   id: string;
@@ -27,10 +27,10 @@ function fallbackProxies(): string[] {
 }
 
 export async function fetchDoubanRecommend(
-  type: 'movie' | 'tv',
-  tag: string,
-  pageStart: number,
-  pageSize: number
+    type: 'movie' | 'tv',
+    tag: string,
+    pageStart: number,
+    pageSize: number
 ): Promise<DoubanItem[]> {
   const cacheKey = `douban:${type}:${tag}:${pageStart}:${pageSize}`;
   const cached = getCache<DoubanItem[]>(cacheKey);

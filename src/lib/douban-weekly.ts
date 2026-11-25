@@ -128,13 +128,13 @@ export async function fetchHotList(id: HotListId): Promise<DoubanItem[]> {
     const raw = (await fetchJson(`/v2/douban/weekly/${category}`)) as SixtyResponse<DoubanWeeklyRaw[]>;
     const isTv = id !== 'douban_movie_weekly';
     items = assertArray<DoubanWeeklyRaw>(raw.data, '豆瓣周榜')
-      .map((entry) => doubanWeeklyToItem(entry, isTv))
-      .filter((item): item is DoubanItem => item !== undefined);
+        .map((entry) => doubanWeeklyToItem(entry, isTv))
+        .filter((item): item is DoubanItem => item !== undefined);
   } else {
     const raw = (await fetchJson('/v2/baidu/teleplay')) as SixtyResponse<BaiduTeleplayRaw[]>;
     items = assertArray<BaiduTeleplayRaw>(raw.data, '百度热播剧榜')
-      .map((entry, i) => baiduTeleplayToItem(entry, i))
-      .filter((item): item is DoubanItem => item !== undefined);
+        .map((entry, i) => baiduTeleplayToItem(entry, i))
+        .filter((item): item is DoubanItem => item !== undefined);
   }
 
   if (items.length === 0) throw new Error('榜单数据为空');

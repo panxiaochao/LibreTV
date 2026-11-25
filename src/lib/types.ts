@@ -108,8 +108,8 @@ export interface SearchResponse {
 
 /** /api/search?stream=1 的 NDJSON 事件：逐源推送 + 最终聚合 */
 export type SearchStreamEvent =
-  | ({ type: 'source' } & SourceSearchOutcome)
-  | { type: 'done'; list: SearchResultItem[]; failures: SearchResponse['failures'] };
+    | ({ type: 'source' } & SourceSearchOutcome)
+    | { type: 'done'; list: SearchResultItem[]; failures: SearchResponse['failures'] };
 
 export interface DoubanResponse {
   items: DoubanItem[];
@@ -197,18 +197,18 @@ export interface LiveEpgResponse {
 
 /** 订阅条目未被导入（跳过）的原因分类 */
 export type SubscriptionSkipReason =
-  /** Spider 类站点（csp_* / jar / js / py），需 TVBOX 引擎才能运行 */
-  | 'spider'
-  /** 仅提供 XML 接口或不支持的类型 */
-  | 'xml'
-  /** 站点自身标记为不可搜索（本站只有搜索入口，导入后无法使用） */
-  | 'unsearchable'
-  /** 直播源不是 M3U 播放列表（如 txt 频道列表、单仓 JSON） */
-  | 'nonM3uLive'
-  /** 接口目录条目自身标记 enabled: false（发布者主动停用，不是异常） */
-  | 'disabled'
-  /** 地址非法、非 http(s) 或未通过服务端公网校验 */
-  | 'invalidUrl';
+/** Spider 类站点（csp_* / jar / js / py），需 TVBOX 引擎才能运行 */
+    | 'spider'
+    /** 仅提供 XML 接口或不支持的类型 */
+    | 'xml'
+    /** 站点自身标记为不可搜索（本站只有搜索入口，导入后无法使用） */
+    | 'unsearchable'
+    /** 直播源不是 M3U 播放列表（如 txt 频道列表、单仓 JSON） */
+    | 'nonM3uLive'
+    /** 接口目录条目自身标记 enabled: false（发布者主动停用，不是异常） */
+    | 'disabled'
+    /** 地址非法、非 http(s) 或未通过服务端公网校验 */
+    | 'invalidUrl';
 
 /** 订阅解析统计：说明跳过与截断情况，用于导入结果提示 */
 export interface SubscriptionParseStats {
