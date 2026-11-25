@@ -70,6 +70,7 @@ export function doubanWeeklyToItem(raw: DoubanWeeklyRaw, isTv: boolean): DoubanI
   if (!raw.id || !raw.title || !cover) return undefined;
   return {
     id: String(raw.id),
+    doubanId: String(raw.id),
     title: raw.title,
     cover,
     rating: raw.rating && raw.rating > 0 ? String(raw.rating) : undefined,

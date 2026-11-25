@@ -77,6 +77,7 @@ export async function fetchDoubanRecommend(
 
   const items: DoubanItem[] = raw.map((s) => ({
     id: s.id,
+    doubanId: s.id,
     title: s.title,
     cover: s.cover,
     rating: s.rate && s.rate !== '0' ? s.rate : undefined,

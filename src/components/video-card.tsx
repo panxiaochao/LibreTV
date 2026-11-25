@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import type { SearchResultItem, SourceConfig } from '@/lib/types';
+import type { DoubanItem, SearchResultItem, SourceConfig } from '@/lib/types';
 import { useAppStore } from '@/lib/store';
 import { qualityKey } from '@/lib/quality';
 import { compactRemarks, formatRemarks, inferGroupRemarks } from '@/lib/remarks';
@@ -394,7 +394,7 @@ export function VideoCard({ item, onClick }: { item: SearchResultItem; onClick: 
 }
 
 /** 豆瓣推荐卡片（无来源徽章，点击直接搜索） */
-export function DoubanCard({ item, onClick }: { item: { title: string; cover: string; rating?: string }; onClick: () => void }) {
+export function DoubanCard({ item, onClick }: { item: DoubanItem; onClick: () => void }) {
   const imageProxyMode = useAppStore((s) => s.imageProxyMode);
   const customImageProxy = useAppStore((s) => s.customImageProxy);
   const [imgFailed, setImgFailed] = useState(false);
@@ -438,8 +438,23 @@ export function DoubanCard({ item, onClick }: { item: { title: string; cover: st
         )}
       </div>
       <div className="p-2">
-        <div className="text-xs font-medium text-content truncate" title={item.title}>
-          {item.title}
+        <div className="flex items-center gap-1.5">
+          <div className="flex-grow min-w-0 text-xs font-medium text-content truncate" title={item.title}>
+            {item.title}
+          </div>
+          {item.doubanId && (
+            <a
+              href={`https://movie.douban.com/subject/${item.doubanId}/`}
+              target="_blank"
+              rel="noreferrer"
+              title="在豆瓣查看"
+              className="tag shrink-0 bg-[#00b51d] text-white font-medium hover:opacity-90 transition-opacity"
+              onClick={(e) => e.stopPropagation()}
+              onKeyDown={(e) => e.stopPropagation()}
+            >
+              豆瓣
+            </a>
+          )}
         </div>
       </div>
     </div>
